@@ -1,0 +1,63 @@
+generated: '2026-09-06'
+method: probed
+source: openapi/acall-public-api-openapi.yml
+docs: https://www.workstyleos.com/publicapi/index.html
+format: plain-text
+rfc9457: false
+summary: >-
+  The Acall Public API publishes NO error contract. Across all thirteen operations the provider's OpenAPI
+  3.0.0 document declares success responses only (200, 201, 204) — there is not a single 4xx or 5xx response
+  object, schema, or example in the spec, so nothing can be derived from it. Everything below was observed
+  by probing the live production base URL unauthenticated on 2026-09-06; it is a record of real behaviour,
+  not a provider-published catalogue.
+derivation:
+  spec_declared_error_responses: 0
+  spec_declared_success_responses: 13
+  note: >-
+    This is a genuine contract-quality gap, not a harvesting miss. An agent reading the published spec cannot
+    tell what an Acall failure looks like, what shape the body has, or which statuses are retryable.
+envelope:
+  content_type: text/plain; charset=utf-8
+  body: a bare human-readable string, no JSON object, no machine-readable code
+  auth_signal: RFC 6750 WWW-Authenticate bearer challenge carries the machine-readable reason
+problems:
+- status: 401
+  title: Unauthenticated
+  body: Unauthenticated
+  www_authenticate: 'Bearer realm="token_required"'
+  cause: No Authorization header presented.
+  remediation: 'Send Authorization: Bearer <token>. Tokens are issued by Acall on request, not self-serve.'
+  method: probed
+  evidence:
+    url: https://api.workstyleos.com/v1/users
+    observed: '2026-09-06'
+- status: 401
+  title: Unauthenticated
+  body: Unauthenticated
+  www_authenticate: 'Bearer error="invalid_token"'
+  cause: Authorization header present but the token is invalid, revoked, or expired.
+  remediation: >-
+    Re-request a token via the contact form. Note the response body is byte-identical to the missing-token
+    case; only the WWW-Authenticate error parameter distinguishes them, so a client must read the header.
+  method: probed
+  evidence:
+    url: https://api.workstyleos.com/v1/users
+    observed: '2026-09-06'
+- status: 404
+  title: Not found endpoint
+  body: Not found endpoint
+  www_authenticate: 'Bearer error="not_found"'
+  cause: The requested path is not a routed Public API endpoint.
+  remediation: Check the path against the reference; note the API answers path 404s before authenticating.
+  method: probed
+  evidence:
+    url: https://api.workstyleos.com/v1/nope
+    observed: '2026-09-06'
+not_recorded:
+- >-
+  Per-resource 404s (an unknown user_id, facility_id, event_id or spot_reservation_id) cannot be probed
+  without a token and are not described in the spec, so their shape is unknown.
+- >-
+  Validation failures on postSpotReservation / putSpotReservation are undocumented and unprobeable
+  unauthenticated. No 400/422 shape is published.
+- Rate-limit (429) and server (5xx) behaviour is undocumented and was not observed.

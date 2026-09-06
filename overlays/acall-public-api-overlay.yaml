@@ -1,0 +1,52 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Acall Public API
+  version: 1.0.0
+extends: openapi/acall-public-api-openapi.yml
+x-generated: '2026-09-06'
+x-method: generated
+x-source: >-
+  Derived from live probes of https://api.workstyleos.com/v1/ and from the artifacts in this repository.
+  Nothing here mutates the harvested original at openapi/_original/acall-public-api-openapi-original.json.
+actions:
+- target: $.info
+  update:
+    description: >-
+      Acall Public API v1 — REST access to workers, facilities, appointments/internal meetings, entry-gate
+      access logs, workspace spots and workspace (spot) reservations for the Acall / WorkstyleOS workplace
+      platform. Beta. Access tokens are issued by Acall on request through the contact form and are not
+      available on the multi-tenant plan.
+    contact:
+      name: Acall Inc.
+      url: https://support.workstyleos.com/faq/show/1250?site_domain=default
+    x-apievangelist-profile: https://github.com/api-evangelist/acall
+    x-api-maturity: beta
+- target: $.servers[0]
+  update:
+    description: >-
+      Production base URL. Verified live 2026-09-06 — an unauthenticated GET /v1/users returns 401 with
+      WWW-Authenticate Bearer realm="token_required".
+- target: $.components.securitySchemes.Bearer
+  update:
+    x-credential-issuance: >-
+      Not self-serve. Submit the Acall contact form with 「API利用希望」 in the body; Acall reviews and
+      issues an access token by reply.
+    x-unavailable-on-plans:
+    - multi-tenant
+- target: $.paths['/spot_reservations/'].post
+  update:
+    x-idempotency: >-
+      None. The API documents no Idempotency-Key header; a retried create produces a second reservation.
+    x-reversal-operation: deleteSpotReservation
+    x-reversal-window: undocumented
+- target: $.paths['/spot_reservations/{spot_reservation_id}'].delete
+  update:
+    x-reversal-operation: null
+    x-irreversible: true
+    x-constraint: >-
+      Reservations linked to multiple spots cannot be deleted (stated by the provider in the operation
+      summary).
+- target: $.paths['/users'].get
+  update:
+    x-result-scope: >-
+      Currently-employed workers only; retired workers are excluded (Acall help centre FAQ 599).

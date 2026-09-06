@@ -1,0 +1,75 @@
+generated: '2026-09-06'
+method: searched
+source: https://www.workstyleos.com/info/release/
+docs: https://www.workstyleos.com/info/release/
+scheme: dated-product-releases
+current_version: null
+note: >-
+  Acall publishes a dated release-notes feed for the WorkstyleOS product covering 24 pages of history. There
+  is no API-specific changelog: the Public API is not versioned in these notes and no entry in the recent
+  window describes a change to the v1 REST contract. Entries below are the recent window read from the feed
+  on 2026-09-06; the live feed is the source of truth.
+cadence: monthly roll-up posts plus individual per-release announcements
+api_specific_entries: 0
+entries:
+- date: '2026-09-04'
+  title: '【近日リリース！】[ 新機能 ] Acall Reception の Microsoft Teams 来訪通知で、担当者にメンションできるようになります'
+  title_en: Upcoming — Acall Reception Microsoft Teams visitor notifications can @mention the host
+  type: addition
+  breaking: false
+  url: https://www.workstyleos.com/info/nps1ycydjb_k/
+- date: '2026-08-31'
+  title: 2026年8月 リリースノート
+  title_en: August 2026 release notes
+  type: roll-up
+  breaking: false
+  url: https://www.workstyleos.com/info/ezkeygcju/
+- date: '2026-08-03'
+  title: 2026年7月 リリースノート
+  title_en: July 2026 release notes
+  type: roll-up
+  breaking: false
+  url: https://www.workstyleos.com/info/2azrmzzqv/
+- date: '2026-07-22'
+  title: '【2026年7月21日リリース】[ 機能改善 ] ワークスペース予約のエクスポートにおけるレコード重複を解消しました'
+  title_en: Fix — duplicate records removed from workspace-reservation export
+  type: fix
+  breaking: false
+  url: https://www.workstyleos.com/info/7qh8d64ij/
+- date: '2026-06-30'
+  title: 2026年6月 リリースノート
+  title_en: June 2026 release notes
+  type: roll-up
+  breaking: false
+  url: https://www.workstyleos.com/info/rrh-eq-ci/
+- date: '2026-06-24'
+  title: '【2026年7月30日リリース】ワークスペース予約タイムラインの機能改善・表示変更のお知らせ'
+  title_en: Workspace-reservation timeline improvements and display changes
+  type: change
+  breaking: false
+  url: https://www.workstyleos.com/info/fh24maih2w/
+- date: '2026-06-15'
+  title: '【2026年6月15日リリース】会議室予約における予約期間制限の判定方法を変更しました'
+  title_en: Changed how the reservation-period limit is evaluated for meeting-room bookings
+  type: change
+  breaking: false
+  url: https://www.workstyleos.com/info/bli4s-bxm5to/
+notable_out_of_window:
+- date: '2026-07-09'
+  title: 複数のSSOサービスでログインできるようになりました（IdP複数設定対応）
+  title_en: Multiple SSO identity providers can now be configured
+  type: addition
+- date: '2026-07-09'
+  title: '[ 仕様変更のお知らせ ] ワーカーCSVインポートのフォーマットにフィールドが追加されました'
+  title_en: Breaking-ish — a field was added to the worker CSV import format
+  type: change
+  breaking: true
+  note: >-
+    A format change to a customer-facing import contract, announced as 仕様変更 (specification change).
+    Recorded because it is the closest thing in the recent window to an integration-contract break.
+- date: '2025-11-30'
+  title: Microsoft Teams Webhook 廃止にともなう対応について
+  title_en: Action required — Microsoft Teams webhook retirement affects Acall Reception Teams integration
+  type: deprecation
+  breaking: true
+  url: https://www.workstyleos.com/info/fnfw9i83thvs/

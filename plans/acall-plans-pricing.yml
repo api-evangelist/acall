@@ -1,0 +1,52 @@
+generated: '2026-09-06'
+method: searched
+source: https://www.workstyleos.com/pricing/
+plan_count: 0
+published_prices: false
+model: quote-based
+currency: JPY
+note: >-
+  Acall publishes a pricing PAGE but no priced plans. The page states 月額費用 is 会議室数に合わせてお見積り
+  ("monthly cost quoted according to the number of meeting rooms") and 初期費用 covers hardware and optional
+  onboarding support; the only way to a number is an estimate form that takes headcount and meeting-room
+  count and routes to sales. The former entry-level Basic プラン is explicitly retired
+  ("Basicプランの提供は終了しました"). Because no tier carries a published price, plan_count is 0 — this is a
+  contact-sales provider, not a missing harvest.
+billing_units:
+- accounts (従業員数 / seats)
+- meeting rooms (会議室数)
+modules:
+  main:
+  - name: 会議室チェックイン
+    name_en: Meeting room check-in
+    url: https://www.workstyleos.com/solutions/meetingroom/
+  - name: 受付チェックイン
+    name_en: Reception check-in (iPad visitor reception, entry/exit)
+    url: https://www.workstyleos.com/solutions/reception/
+  - name: スポットチェックイン
+    name_en: Spot check-in (free-address desk booking / hoteling)
+    url: https://www.workstyleos.com/solutions/hoteling/
+  options:
+  - name: ゲートチェックイン
+    name_en: Gate check-in (entry-gate integration)
+    url: https://www.workstyleos.com/solutions/gate/
+  - name: マルチテナント
+    name_en: Multi-tenant
+    url: https://www.workstyleos.com/solutions/multitenant/
+    note: The Public API is NOT available on this plan.
+  - name: SSO / プロビジョニング
+    name_en: SSO and provisioning
+    note: Paid option per the security page.
+trial:
+  available: true
+  length: 2 weeks (無料トライアル), with a further ~1 month build/pilot phase before go-live
+  scope: all features except ゲートチェックイン (gate check-in)
+  self_serve: false
+  route: https://www.workstyleos.com/contact/
+api_access:
+  included_in_plans: null
+  gate: >-
+    Not a pricing tier. Per help-centre FAQ 598, API access is granted by request through the contact form
+    and is unavailable on the multi-tenant plan.
+  source: https://support.workstyleos.com/faq/show/598?site_domain=default
+plans: []

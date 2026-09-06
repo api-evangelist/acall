@@ -1,0 +1,131 @@
+generated: '2026-09-06'
+method: derived
+source: openapi/acall-public-api-openapi.yml
+summary: >-
+  Entity-relationship graph derived from the 24 component schemas and the id-reference fields in the Acall
+  Public API v1 OpenAPI. Six root entities (Worker/User, Facility, Event, GateLog, Spot, SpotReservation)
+  with five embedded sub-entities. Ids are opaque strings with no documented prefix scheme; relationships
+  are expressed by embedding a partial representation of the related object rather than by a link or an
+  expandable reference.
+entities:
+- name: User
+  label: Worker
+  id_field: user_id
+  detail_schema: UserDetail
+  operations: [getUsers, getUser]
+  fields: [user_id, family_name, given_name, family_name_phonetic, given_name_phonetic, email, tel, role_names, belong_groups]
+  note: >-
+    Retired employees are excluded — GET /users returns only currently-employed workers (help-centre FAQ
+    599). There is no Group entity of its own; groups exist only as embedded UserBelongGroup objects.
+- name: Facility
+  id_field: facility_id
+  detail_schema: FacilityDetail
+  operations: [getFacilities, getFacility]
+  fields: [facility_id, facility_name, location, type, usage, description]
+  note: A bookable room or resource. There is no facility-reservation write surface in the Public API.
+- name: Event
+  label: Appointment / internal meeting
+  id_field: event_id
+  detail_schema: EventDetail
+  operations: [getEvents, getEvent]
+  fields: [event_id, title, guests, starting_at, ending_at, attend_users, facilities, note, agendas, mail_template_id, access_policy]
+  note: >-
+    The reception/meeting record. Read-only over the API, but it IS the entity the outbound webhook surface
+    fires on (create/update/delete of appointments and internal meetings) — see asyncapi/acall-webhooks.yml.
+- name: GateLog
+  id_field: gate_id
+  operations: [getGateLogs]
+  fields: [gate_id, gate_name, status, opened_at, operators, passers]
+  note: An entry-gate open event. Append-only from the API's point of view.
+- name: Spot
+  label: Workspace / desk
+  id_field: spot_id
+  operations: [getSpots]
+  fields: [spot_id, name, qr_token]
+  note: >-
+    Spots form a hierarchy — getSpots and getSpotReservations both accept root_spot_id to scope a subtree —
+    but the Spot schema exposes no parent_id, so the tree is navigable only downward from a caller-supplied
+    root. qr_token is the check-in QR credential.
+- name: SpotReservation
+  id_field: spot_reservation_id
+  detail_schema: SpotReservationDetail
+  operations: [getSpotReservations, getSpotReservation, postSpotReservation, putSpotReservation, deleteSpotReservation]
+  fields: [spot_reservation_id, spot_id, starting_at, ending_at, invited_users, title, description]
+  note: The only writable entity in the API.
+embedded_types:
+- name: UserBelongGroup
+  parent: User
+  fields: [group_id, group_name]
+- name: EventGuest
+  parent: Event
+  fields: [guest_id, family_name, given_name, family_name_phonetic, given_name_phonetic, guest_company_name, emails]
+- name: EventAttendUser
+  parent: Event
+  fields: [user_id, family_name, given_name, email]
+- name: EventFacility
+  parent: Event
+  fields: [facility_id, facility_name, facility_type]
+- name: GateOperator
+  parent: GateLog
+  fields: [operator_type, operator_name]
+- name: GatePasser
+  parent: GateLog
+  fields: [id, family_name, given_name, family_name_ruby, given_name_ruby]
+- name: InvitedUser
+  parent: SpotReservation
+  fields: [user_id]
+relationships:
+- from: User
+  to: UserBelongGroup
+  kind: has_many
+  via: belong_groups
+- from: Event
+  to: EventGuest
+  kind: has_many
+  via: guests
+- from: Event
+  to: User
+  kind: has_many
+  via: attend_users.user_id
+  note: Embedded EventAttendUser carries user_id, resolvable against getUser.
+- from: Event
+  to: Facility
+  kind: has_many
+  via: facilities.facility_id
+  note: Embedded EventFacility carries facility_id, resolvable against getFacility.
+- from: GateLog
+  to: GatePasser
+  kind: has_many
+  via: passers
+  note: >-
+    GatePasser.id is named id, not user_id, and the spec does not state whether it is a worker id. Treated
+    as unresolved — do not assume it joins to User.
+- from: GateLog
+  to: GateOperator
+  kind: has_many
+  via: operators
+- from: SpotReservation
+  to: Spot
+  kind: belongs_to
+  via: spot_id
+- from: SpotReservation
+  to: User
+  kind: has_many
+  via: invited_users.user_id
+  note: Written as invited_user_ids on create/update, read back as invited_users[].user_id.
+- from: Spot
+  to: Spot
+  kind: has_many
+  via: root_spot_id
+  note: >-
+    Hierarchy implied by the root_spot_id query parameter only; no parent/child field is exposed on the Spot
+    schema itself.
+id_prefixes:
+  documented: false
+  note: >-
+    No id-prefix or id-format convention is documented, and no examples are supplied in the spec, so the
+    shape of user_id, spot_id, event_id and the rest is unknown to a caller until first response.
+gaps:
+- Group has no first-class resource despite being referenced from every User.
+- Guest has no first-class resource despite carrying guest_id and PII on every Event.
+- Facility reservations (meeting-room bookings) are not exposed; only spot (desk) reservations are writable.

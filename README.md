@@ -64,5 +64,20 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Acall is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://equityzen.com/company/acall
+Acall Inc. (アコール株式会社) is a Japanese workplace-experience software company, founded in 2010 and
+headquartered in Tokyo with a Kobe office. Its Acall / WorkstyleOS platform runs the physical side of hybrid
+work for more than 7,000 organizations — visitor reception (Acall Reception), meeting-room booking (Acall
+Meeting), free-address desk and workspace "spot" reservation (Acall Desktop), entry-gate integration (Acall
+Gate), AI Meeting, Neat device integration, and a multi-tenant building mode.
+
+Acall publishes a REST **Acall Public API** (v1, HTTP bearer, 13 operations) covering workers, facilities,
+appointments and internal meetings, entry-gate access logs, workspace spots and workspace reservations, plus
+an outbound webhook surface for appointment events. Access is not self-serve: a token is issued only after a
+request through the contact form, and the API is unavailable on the multi-tenant plan.
+
+- API reference: https://www.workstyleos.com/publicapi/index.html
+- Base URL: https://api.workstyleos.com/v1/
+- Company: https://www.acall.inc/
+- Product: https://www.workstyleos.com/
+- Status: https://status.acall.inc/
+- Secondary-market listing this profile was seeded from: https://equityzen.com/company/acall

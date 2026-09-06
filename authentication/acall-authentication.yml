@@ -1,0 +1,60 @@
+generated: '2026-09-06'
+method: searched
+source: openapi/acall-public-api-openapi.yml
+docs: https://support.workstyleos.com/faq/show/598?site_domain=default
+summary:
+  types:
+  - http
+  api_key_in: []
+  oauth2_flows: []
+schemes:
+- name: Bearer
+  type: http
+  scheme: bearer
+  description: Access token for API
+  sources:
+  - openapi/acall-public-api-openapi.yml
+  applied: global
+  note: >-
+    Declared as a document-level security requirement (security: [{Bearer: []}]) in the Acall Public API
+    spec, so it applies to all 13 operations.
+credential_issuance:
+  self_serve: false
+  process: >-
+    Acall does not issue API tokens through a developer console. The published help-centre article
+    "利用できる API を教えてください" (FAQ 598) instructs customers to submit the contact form with
+    「API利用希望」 (request to use the API) in the body; Acall reviews the request and then issues an
+    access token by reply.
+  request_url: https://support.workstyleos.com/faq/show/1250?site_domain=default
+  restrictions:
+  - >-
+    The API is not available to customers on the multi-tenant (マルチテナント) plan — stated verbatim in
+    FAQ 598 under ご利用条件.
+  source: https://support.workstyleos.com/faq/show/598?site_domain=default
+observed_challenge:
+  probed: '2026-09-06'
+  note: >-
+    Live unauthenticated probes of the production base URL return an RFC 6750 bearer challenge. Bodies are
+    text/plain, not JSON.
+  probes:
+  - url: https://api.workstyleos.com/v1/users
+    request: no Authorization header
+    status: 401
+    www_authenticate: Bearer realm="token_required"
+    body: Unauthenticated
+  - url: https://api.workstyleos.com/v1/users
+    request: "Authorization: Bearer <invalid>"
+    status: 401
+    www_authenticate: Bearer error="invalid_token"
+    body: Unauthenticated
+  - url: https://api.workstyleos.com/v1/nope
+    request: no Authorization header
+    status: 404
+    www_authenticate: Bearer error="not_found"
+    body: Not found endpoint
+sso:
+  note: >-
+    Distinct from API authentication: the Acall Portal end-user product supports SAML/OIDC single sign-on
+    (Microsoft Entra ID / Azure AD and others) as a paid option, and since the 2026-07-09 release supports
+    multiple simultaneous IdPs. This governs human login to portal.workstyleos.com, not Public API tokens.
+  source: https://www.workstyleos.com/security/

@@ -1,0 +1,18 @@
+generated: '2026-09-06'
+method: generated
+source: openapi/acall-public-api-openapi.yml
+note: >-
+  Acall publishes no AGENTS.md, no skill files, and no agent guidance. These two skills were generated from
+  the provider's own OpenAPI; every operationId referenced was verified present in
+  openapi/acall-public-api-openapi.yml.
+skills:
+- file: acall-book-a-workspace.md
+  name: Book a workspace for a worker in Acall
+  api: openapi/acall-public-api-openapi.yml
+  operations: [getUsers, getSpots, getSpotReservations, postSpotReservation, getSpotReservation]
+  covers_write_surface: true
+- file: acall-reconcile-visits-and-access.md
+  name: Reconcile Acall appointments against entry-gate access logs
+  api: openapi/acall-public-api-openapi.yml
+  operations: [getEvents, getEvent, getGateLogs, getFacilities, getFacility]
+  covers_write_surface: false

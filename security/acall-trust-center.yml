@@ -1,0 +1,68 @@
+generated: '2026-09-06'
+method: searched
+probe: true
+url: https://www.workstyleos.com/security/
+note: >-
+  Acall has no trust portal in the modern sense (no trust.acall.* host, no document-request workflow, no
+  subprocessor list, no SOC 2 report). What it does publish is a security-posture page plus a formal
+  information-security policy and a named ISO/IEC 27001 registration, which is a real, verifiable published
+  compliance program.
+certifications:
+- name: ISO/IEC 27001 (ISMS)
+  also_registered_as: JIS Q 27001
+  certificate_number: ISA IS 0170
+  scope_url: https://www.acall.inc/about/details
+  source: https://www.workstyleos.com/security/
+  verified: '2026-09-06'
+  note: >-
+    Stated on the security page as 「ISO 27001（ISMS）」の認証を取得しています and carried in the site footer
+    as 認証番号: ISA IS 0170. The registration summary is linked from the company-details page.
+not_found:
+- SOC 2
+- PCI DSS
+- HIPAA
+- FedRAMP
+- ISO 27017
+- ISO 27018
+- CSA STAR
+- Privacy Mark (Pマーク)
+policies:
+- name: 情報セキュリティ方針 (Information Security Policy)
+  url: https://www.workstyleos.com/security_policy/
+  established: '2022-01-07'
+  revised: '2023-08-01'
+  signed_by: 代表取締役 長沼斉寿
+- name: セキュリティへの取り組み (Security measures)
+  url: https://www.workstyleos.com/security/
+controls_published:
+- encryption of stored confidential data at rest
+- TLS/SSL for all traffic to Acall
+- source IP address restriction for Acall Portal access
+- single sign-on (Microsoft Entra ID / Azure AD and others) as a paid option
+- documented risk assessment, internal audit, and incident-response process (per the security policy)
+incident_transparency:
+  status_page: https://status.acall.inc/
+  incident_reports: https://www.workstyleos.com/sctl/
+evidence:
+- source: https://www.workstyleos.com/security/
+  status: 200
+  keywords: [iso 27001, isms, 暗号化, ip アドレス制限, sso]
+- source: https://www.workstyleos.com/security_policy/
+  status: 200
+  keywords: [情報セキュリティ方針, リスクアセスメント, 情報セキュリティマネジメントシステム]
+- source: https://www.acall.inc/about/details
+  status: 200
+  keywords: [ISO/IEC27001, JISQ27001, 認証登録概要]
+vulnerability_disclosure:
+  found: false
+  note: >-
+    No security.txt on any Acall host, no /security/responsible-disclosure or vulnerability-disclosure page,
+    no bug-bounty program on HackerOne, Bugcrowd or Intigriti, and no security@ contact published. The only
+    security.txt reachable under an Acall hostname is Atlassian's, served by the Statuspage vendor at
+    status.acall.inc — see well-known/acall-well-known.yml. No Security or VulnerabilityDisclosure pointer
+    is emitted.
+pointer_emitted: false
+pointer_note: >-
+  No TrustCenter pointer is wired into apis.yml — Acall publishes a security-posture page and a named
+  ISO/IEC 27001 registration, but no trust portal. The published certification is carried instead by the
+  Compliance pointer at https://www.workstyleos.com/security/.

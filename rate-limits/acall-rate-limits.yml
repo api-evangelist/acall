@@ -1,0 +1,25 @@
+generated: '2026-09-06'
+method: searched
+source: https://www.workstyleos.com/publicapi/index.html
+limit_count: 0
+documented: false
+note: >-
+  Acall documents no rate limits for the Public API. The published reference at
+  https://www.workstyleos.com/publicapi/index.html carries no throttling section, the OpenAPI declares no
+  429 response on any of the thirteen operations, and live unauthenticated responses from
+  https://api.workstyleos.com/v1/ returned no RateLimit-*, X-RateLimit-* or Retry-After header. An honest
+  zero: an agent has no published or observable signal for how hard it may call this API.
+limits: []
+response_headers:
+  observed: []
+  documented: []
+  probed: '2026-09-06'
+  probe_urls:
+  - https://api.workstyleos.com/v1/users
+  - https://api.workstyleos.com/v1/spot_reservations/
+status_on_exhaustion: null
+pagination_ceiling:
+  note: >-
+    The only volume control the contract exposes is the limit query parameter on the six collection
+    operations; the spec states no maximum value for it.
+  cross_reference: conventions/acall-conventions.yml

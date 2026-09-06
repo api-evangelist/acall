@@ -1,0 +1,74 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  npm registry search, PyPI, RubyGems, crates.io, the Acall help centre, the Acall Public API reference, and
+  github.com/acall-inc
+packages: []
+official_sdk_count: 0
+summary: >-
+  Acall ships no client libraries in any language. The Acall Public API reference documents raw HTTP only,
+  the help centre's API article points at a curl-level reference, and no first-party package exists on any
+  registry checked. No SDKs pointer is emitted.
+registries_checked:
+- registry: npm
+  query: acall / workstyleos
+  result: none
+  note: >-
+    The only near-name hit is acall.js (an unrelated node spawn wrapper by mattiasrunge, last published
+    2015-05-22); workstyleos returns zero results.
+  version: null
+  published: null
+- registry: pypi
+  query: acall / workstyleos / acall-sdk
+  result: none
+  note: >-
+    pypi.org/project/acall/ exists but is an unrelated package by dsm-72 (version 0.0.2, home page
+    github.com/dsm-72/acall). workstyleos and acall-sdk both 404.
+  version: null
+  published: null
+- registry: rubygems
+  query: acall
+  result: none
+  note: 404 from rubygems.org/api/v1/gems/acall.json.
+  version: null
+  published: null
+- registry: crates.io
+  query: acall
+  result: none
+  note: No crate; the registry API answered 403 to our client, so this row is a probe attempt, not a confirmed absence.
+  version: null
+  published: null
+- registry: maven-central
+  query: acall / workstyleos
+  result: none
+  version: null
+  published: null
+- registry: nuget
+  query: acall
+  result: none
+  version: null
+  published: null
+- registry: packagist
+  query: acall
+  result: none
+  version: null
+  published: null
+- registry: pkg.go.dev
+  query: acall
+  result: none
+  version: null
+  published: null
+source_repositories:
+  org: https://github.com/acall-inc
+  repos_public: 6
+  first_party_libraries: 0
+  note: >-
+    The organization is Acall Inc. (website acall.jp, location Japan). Five of the six public repositories
+    are forks of third-party projects (nuxt-fcm, node-wifi, cordova-plugin-qrscanner, nextra, protodep) and
+    four of those are archived; the one non-fork, acall-romaji-ruby, is a Japanese romanization helper, not
+    an API client. Nothing here wraps the Acall Public API.
+end_user_applications:
+  note: >-
+    Acall does distribute mobile and tablet applications (Acall Reception for iPad, Acall mobile) through the
+    Apple App Store and Google Play. These are end-user products, not developer packages, and are not
+    catalogued here.

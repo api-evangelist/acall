@@ -1,0 +1,96 @@
+generated: '2026-09-06'
+method: derived
+source: openapi/acall-public-api-openapi.yml
+status: candidate
+summary: >-
+  Acall publishes no MCP server. Searches of the provider's site, help centre, release notes, GitHub
+  organization (github.com/acall-inc — six repositories, five of them archived forks of unrelated projects)
+  and the public MCP registries found nothing. The tool list below is a CANDIDATE derived one-to-one from
+  the thirteen operations in the provider's own OpenAPI; it describes what an MCP server over this API would
+  expose, and asserts nothing about Acall shipping one.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+  note: >-
+    auth reflects what a server over this API would need — the Acall-issued HTTP bearer access token, which
+    is not self-serve. mode is none because no server exists.
+server:
+  name: acall
+  transport: null
+  url: null
+tools:
+- name: list_users
+  description: List currently-employed workers, with limit/offset paging and freeword search.
+  source_operation: openapi/acall-public-api-openapi.yml#getUsers
+  read_only: true
+- name: get_user
+  description: Get one worker by user_id.
+  source_operation: openapi/acall-public-api-openapi.yml#getUser
+  read_only: true
+- name: list_facilities
+  description: List facilities (meeting rooms and other bookable resources).
+  source_operation: openapi/acall-public-api-openapi.yml#getFacilities
+  read_only: true
+- name: get_facility
+  description: Get one facility by facility_id.
+  source_operation: openapi/acall-public-api-openapi.yml#getFacility
+  read_only: true
+- name: list_events
+  description: List appointments and internal meetings within a time range.
+  source_operation: openapi/acall-public-api-openapi.yml#getEvents
+  read_only: true
+- name: get_event
+  description: Get one appointment or internal meeting by event_id, including guests and facilities.
+  source_operation: openapi/acall-public-api-openapi.yml#getEvent
+  read_only: true
+- name: list_gate_logs
+  description: List entry-gate access log entries within a time range.
+  source_operation: openapi/acall-public-api-openapi.yml#getGateLogs
+  read_only: true
+- name: list_spots
+  description: List workspace spots (desks), optionally scoped to a root_spot_id subtree.
+  source_operation: openapi/acall-public-api-openapi.yml#getSpots
+  read_only: true
+- name: list_spot_reservations
+  description: List workspace reservations within a time range and spot subtree.
+  source_operation: openapi/acall-public-api-openapi.yml#getSpotReservations
+  read_only: true
+- name: get_spot_reservation
+  description: Get one workspace reservation by spot_reservation_id.
+  source_operation: openapi/acall-public-api-openapi.yml#getSpotReservation
+  read_only: true
+- name: create_spot_reservation
+  description: Create a workspace reservation for a spot and time range, optionally inviting workers.
+  source_operation: openapi/acall-public-api-openapi.yml#postSpotReservation
+  read_only: false
+  caution: >-
+    No idempotency mechanism exists on this operation; a retried call creates a second reservation. May send
+    email (send_mail flag).
+- name: update_spot_reservation
+  description: Update a workspace reservation's time range, invitees, title or description.
+  source_operation: openapi/acall-public-api-openapi.yml#putSpotReservation
+  read_only: false
+  caution: No prior-state snapshot is returned; capture the reservation before mutating it.
+- name: delete_spot_reservation
+  description: Delete a workspace reservation.
+  source_operation: openapi/acall-public-api-openapi.yml#deleteSpotReservation
+  read_only: false
+  caution: >-
+    Irreversible — no restore operation exists. Reservations linked to multiple spots cannot be deleted at
+    all.
+searched:
+  date: '2026-09-06'
+  looked_at:
+  - https://www.workstyleos.com/ (nav, footer, solutions, release notes)
+  - https://support.workstyleos.com/ (help centre category and FAQ sweep)
+  - https://github.com/acall-inc
+  - public MCP server registries and directories
+  result: no first-party or third-party Acall MCP server found
+pointer_emitted: false
+pointer_note: >-
+  No MCPServer pointer is wired into apis.yml. Acall ships no MCP server; the tools[] list here is a derived
+  candidate, and an MCPServer pointer would credit Acall with an agent surface it does not operate.

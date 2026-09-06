@@ -1,23 +1,144 @@
 aid: acall
 name: Acall
-description: 'Acall is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Acall Inc. (アコール株式会社) is a Japanese workplace-experience software company, founded in 2010 and
+  headquartered in Tokyo with a Kobe office, whose Acall / WorkstyleOS platform runs the physical side of
+  hybrid work for more than 7,000 organizations. The product is a set of check-in surfaces — Acall Reception
+  (iPad visitor reception and entry/exit records), Acall Meeting (meeting-room booking and utilization),
+  Acall Desktop (free-address desk and workspace "spot" reservation / hoteling), Acall Gate (entry-gate
+  integration), AI Meeting, Neat device integration and a multi-tenant building mode — stitched to Microsoft
+  365 and Google Calendar, Teams/Slack/Chatwork notifications, and SSO/SCIM-style provisioning. Acall
+  publishes a REST "Acall Public API" (v1, bearer token) covering workers, facilities, events, gate access
+  logs, spots and spot reservations, plus an outbound Webhook surface for appointment and internal-meeting
+  events. API access is not self-serve: a token is issued only after a request through the contact form, and
+  the API is unavailable on the multi-tenant plan.
 url: https://raw.githubusercontent.com/api-evangelist/acall/refs/heads/main/apis.yml
+image: https://www.workstyleos.com/images/common/ogp/acall_ogp.png
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-09-06'
 modified: '2026-09-06'
 tags:
-- Company
-apis: []
+- Workplace Management
+- Visitor Management
+- Meeting Room Booking
+- Desk Booking
+- Hybrid Work
+- Access Control
+- Facilities
+- Smart Office
+- Japan
+- SaaS
+tags_raw:
+- workplace-management
+- visitor-management
+- meeting-room-booking
+- desk-booking
+- hybrid-work
+- access-control
+- facilities
+- smart-office
+- japan
+- saas
+apis:
+- name: Acall Public API
+  description: >-
+    REST API (v1) for the Acall / WorkstyleOS workplace platform. Thirteen operations across six resource
+    families — workers (users), facilities, events, gate access logs, spots, and spot reservations — with
+    spot reservations being the only writable surface (create, update, delete). Authentication is an
+    HTTP bearer access token issued by Acall on request; the API is in beta and is not available on the
+    multi-tenant plan.
+  humanURL: https://www.workstyleos.com/publicapi/index.html
+  baseURL: https://api.workstyleos.com/v1/
+  image: https://www.workstyleos.com/images/common/ogp/acall_ogp.png
+  tags:
+  - Workplace Management
+  - Meeting Room Booking
+  - Desk Booking
+  - Visitor Management
+  - Access Control
+  - Facilities
+  tags_raw:
+  - workplace-management
+  - meeting-room-booking
+  - desk-booking
+  - visitor-management
+  - access-control
+  - facilities
+  properties:
+  - type: OpenAPI
+    url: openapi/acall-public-api-openapi.yml
+  - type: APIReference
+    url: https://www.workstyleos.com/publicapi/index.html
+  - type: Documentation
+    url: https://support.workstyleos.com/faq/show/598?site_domain=default
+common:
+- type: AgenticAccess
+  url: agentic-access/acall-agentic-access.yml
+- type: DomainSecurity
+  url: security/acall-domain-security.yml
+- type: Authentication
+  url: authentication/acall-authentication.yml
+- type: Website
+  url: https://www.acall.inc/
+- type: Documentation
+  url: https://support.workstyleos.com/faq/show/598?site_domain=default
+- type: APIReference
+  url: https://www.workstyleos.com/publicapi/index.html
+- type: Support
+  url: https://support.workstyleos.com/?site_domain=default
+- type: Login
+  url: https://portal.workstyleos.com/login
+- type: Pricing
+  url: https://www.workstyleos.com/pricing/
+- type: TermsOfService
+  url: https://www.workstyleos.com/terms_of_use/
+- type: PrivacyPolicy
+  url: https://www.acall.inc/privacypolicy
+- type: StatusPage
+  url: https://status.acall.inc/
+- type: ChangeLog
+  url: https://www.workstyleos.com/info/release/
+- type: Blog
+  url: https://workstylelab.acall.inc/
+- type: GitHubOrganization
+  url: https://github.com/acall-inc
+- type: Compliance
+  url: https://www.workstyleos.com/security/
+- type: Conventions
+  url: conventions/acall-conventions.yml
+- type: ErrorCatalog
+  url: errors/acall-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/acall-lifecycle.yml
+- type: Conformance
+  url: conformance/acall-conformance.yml
+- type: DataModel
+  url: data-model/acall-data-model.yml
+- type: Packages
+  url: packages/acall-packages.yml
+- type: Webhooks
+  url: asyncapi/acall-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/acall-llms.txt
+- type: Overlay
+  url: overlays/acall-public-api-overlay.yaml
+- type: RateLimits
+  url: rate-limits/acall-rate-limits.yml
+- type: Plans
+  url: plans/acall-plans-pricing.yml
+- type: ChangeLog
+  url: changelog/acall-changelog.yml
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v3
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
-common:
-- type: Website
-  url: https://equityzen.com/company/acall

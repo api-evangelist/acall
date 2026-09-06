@@ -1,0 +1,395 @@
+generated: '2026-09-06'
+method: probed
+source: live GET of the named /.well-known/ path list on every host in apis.yml plus every OpenAPI servers[] host
+summary:
+  hosts_probed: 10
+  paths_probed_per_host: 14
+  documents_served_by_acall: 0
+  note: 'Acall serves no /.well-known/ discovery document on any host the record knows. Two hosts returned 2xx and
+    both were rejected on content: portal.workstyleos.com is an SPA catch-all that also answers 200 for a negative
+    control, and the only real document found (status.acall.inc security.txt) belongs to Atlassian Statuspage, not
+    Acall. No WellKnown and no SecurityTxt pointer is emitted.'
+hosts:
+- host: https://acall.jp
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 2814
+  hit_count: 0
+- host: https://www.acall.jp
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 2814
+  hit_count: 0
+- host: https://www.acall.inc
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 301
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+  - path: /.well-known/oauth-protected-resource
+    status: 301
+  - path: /.well-known/api-catalog
+    status: 301
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 5164
+  hit_count: 0
+- host: https://www.workstyleos.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 301
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+  - path: /.well-known/oauth-protected-resource
+    status: 301
+  - path: /.well-known/api-catalog
+    status: 301
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 5915
+  hit_count: 0
+- host: https://api.workstyleos.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 19
+  hit_count: 0
+- host: https://api.acall.jp
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 691
+  hit_count: 0
+- host: https://portal.workstyleos.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 302
+  - path: /.well-known/openid-configuration
+    status: 200
+    counts: false
+    note: HTTP 200 returned the site's HTML shell, not a document. Nothing saved.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    counts: false
+    note: HTTP 200 returned the site's HTML shell, not a document. Nothing saved.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    counts: false
+    note: HTTP 200 returned the site's HTML shell, not a document. Nothing saved.
+  - path: /.well-known/api-catalog
+    status: 200
+    counts: false
+    note: HTTP 200 returned the site's HTML shell, not a document. Nothing saved.
+  - path: /.well-known/ai-plugin.json
+    status: 302
+  - path: /.well-known/ucp.json
+    status: 302
+  - path: /.well-known/acp.json
+    status: 302
+  - path: /.well-known/aauth-resource.json
+    status: 302
+  - path: /.well-known/apis.json
+    status: 302
+  - path: /apis.json
+    status: 302
+  - path: /apis.yml
+    status: 200
+    counts: false
+    note: HTTP 200 returned the site's HTML shell, not a document. Nothing saved.
+  - path: /.well-known/agent-card.json
+    status: 302
+  - path: /.well-known/agent.json
+    status: 302
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 302
+    bytes: 0
+  hit_count: 0
+  note: 'Nuxt single-page-app catch-all: every path returns the same 4,557-byte HTML shell, including the negative
+    control. No document was fetched or saved; treated as a miss on every path.'
+- host: https://support.workstyleos.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 2515
+  hit_count: 0
+- host: https://status.acall.inc
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: acall-status-atlassian-security.txt
+    counts: false
+    note: Vendor (Atlassian Statuspage) security.txt served on Acall's status subdomain — not an Acall document.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 0
+  hit_count: 0
+  note: 'The 200 at /.well-known/security.txt is Atlassian Statuspage''s own vendor security.txt (Contact: security@atlassian.com,
+    https://www.atlassian.com/trust/security/report-a-vulnerability), not a document Acall authored or serves for
+    its own product. Saved as evidence, but it is NOT an Acall security.txt and earns no SecurityTxt pointer.'
+- host: https://workstylelab.acall.inc
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/acall-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 80655
+  hit_count: 0
+pointer_emitted: false
+pointer_note: >-
+  No WellKnown and no SecurityTxt pointer is wired into apis.yml. Acall serves no /.well-known/ document on
+  any host; this file records that absence, and a pointer would assert a surface the provider does not
+  publish.

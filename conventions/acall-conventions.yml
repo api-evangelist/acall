@@ -1,0 +1,150 @@
+generated: '2026-09-06'
+method: derived
+source: openapi/acall-public-api-openapi.yml
+docs: https://www.workstyleos.com/publicapi/index.html
+summary: >-
+  Cross-cutting request/response semantics for the Acall Public API v1, derived from the provider's own
+  OpenAPI 3.0.0 document and confirmed against live unauthenticated probes of the production base URL.
+base_url: https://api.workstyleos.com/v1/
+authentication:
+  style: http-bearer
+  header: 'Authorization: Bearer <token>'
+  scope: document-level security requirement, applies to all 13 operations
+  issuance: not self-serve — token issued by Acall on request (see authentication/acall-authentication.yml)
+  cross_reference: authentication/acall-authentication.yml
+idempotency:
+  coverage: none
+  supported: false
+  header: null
+  scope: []
+  evidence: >-
+    The OpenAPI declares no Idempotency-Key (or equivalent) header on any operation, and the published
+    reference at https://www.workstyleos.com/publicapi/index.html documents no replay-protection mechanism.
+    Three of the thirteen operations mutate state (postSpotReservation, putSpotReservation,
+    deleteSpotReservation) and none of them can be safely retried by a client that did not observe the
+    response.
+  cross_reference: openapi/acall-public-api-openapi.yml
+reversibility:
+  grade: documented
+  note: >-
+    The one write surface, spot (workspace) reservations, ships a full CRUD triangle: a reservation created
+    with postSpotReservation can be amended with putSpotReservation or removed with deleteSpotReservation.
+    No time window, cut-off, or retention period for the reversal is stated anywhere in the reference or the
+    help centre, so this grades as documented rather than verified — an agent can undo a reservation but
+    cannot know from the published contract until when.
+  write_surfaces:
+  - operation: postSpotReservation
+    method: POST
+    path: /spot_reservations/
+    reversal: deleteSpotReservation
+    reversal_kind: delete
+    window: null
+    window_source: null
+    constraint: >-
+      Stated in the operation summary of deleteSpotReservation — 複数スポットに紐づく予約データは削除不可
+      ("reservation data linked to multiple spots cannot be deleted"). A reservation spanning more than one
+      spot is therefore NOT reversible through this API.
+  - operation: putSpotReservation
+    method: PATCH
+    path: /spot_reservations/{spot_reservation_id}
+    reversal: putSpotReservation
+    reversal_kind: re-update
+    window: null
+    window_source: null
+    constraint: >-
+      An update is reversed only by issuing a further update; the API returns no prior-state snapshot, so a
+      caller must capture the reservation with getSpotReservation before mutating it if it wants to restore.
+  - operation: deleteSpotReservation
+    method: DELETE
+    path: /spot_reservations/{spot_reservation_id}
+    reversal: null
+    reversal_kind: none
+    window: null
+    window_source: null
+    constraint: >-
+      No restore/undelete operation exists. A deleted reservation can only be re-created with
+      postSpotReservation, which produces a new spot_reservation_id.
+  read_only_surface: >-
+    The other ten operations (users, facilities, events, gate logs, spots, and the reservation reads) are
+    GET-only and carry no reversibility obligation.
+dry_run_mode:
+  supported: false
+  evidence: No dry-run, preview, validate-only, or simulate parameter appears in any operation.
+pagination:
+  style: limit-offset
+  params:
+  - name: limit
+    in: query
+  - name: offset
+    in: query
+  applies_to:
+  - getUsers
+  - getFacilities
+  - getEvents
+  - getGateLogs
+  - getSpots
+  - getSpotReservations
+  response_fields: []
+  note: >-
+    Collection responses are derived from the spec's array schemas; the document declares no envelope with a
+    total count, next-cursor, or has-more flag, so a client paginates blind until a short page is returned.
+filtering:
+  freeword:
+    param: freeword
+    applies_to: [getUsers, getFacilities, getEvents, getGateLogs]
+    note: Single free-text search parameter; no field-scoped filter syntax is documented.
+  time_range:
+    params: [starting_at, ending_at]
+    applies_to: [getEvents, getGateLogs, getSpotReservations]
+  scoping:
+    params: [root_spot_id]
+    applies_to: [getSpots, getSpotReservations]
+field_expansion:
+  supported: false
+  note: >-
+    No expand/include/fields parameter. Detail schemas (UserDetail, FacilityDetail, EventDetail,
+    SpotReservationDetail) are separate, richer representations returned only by the single-resource GET.
+metadata:
+  supported: false
+  note: No customer-defined metadata bag is exposed on any resource schema.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is documented, and none was observed on live responses from
+    api.workstyleos.com. The api.acall.jp host does emit X-Request-Id, but that is a different (non-Public-API)
+    surface.
+versioning:
+  scheme: uri-path
+  current: v1
+  base: https://api.workstyleos.com/v1/
+  spec_version: 'v1'
+  cross_reference: lifecycle/acall-lifecycle.yml
+error_envelope:
+  format: text/plain
+  rfc9457: false
+  observed: '2026-09-06'
+  note: >-
+    The OpenAPI declares only success responses (200/201/204) — no 4xx or 5xx response is described for any
+    of the thirteen operations. Live probing shows the API answers errors with a plain-text body and an
+    RFC 6750 WWW-Authenticate challenge rather than a JSON error object.
+  examples:
+  - status: 401
+    www_authenticate: Bearer realm="token_required"
+    body: Unauthenticated
+  - status: 401
+    www_authenticate: Bearer error="invalid_token"
+    body: Unauthenticated
+  - status: 404
+    www_authenticate: Bearer error="not_found"
+    body: Not found endpoint
+  cross_reference: errors/acall-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: null
+  note: >-
+    No rate-limit headers are documented and none were observed on live responses. See
+    rate-limits/acall-rate-limits.yml.
+  cross_reference: rate-limits/acall-rate-limits.yml
+events:
+  outbound_webhooks: true
+  cross_reference: asyncapi/acall-webhooks.yml

@@ -1,0 +1,50 @@
+generated: '2026-09-06'
+method: searched
+source: https://www.workstyleos.com/publicapi/index.html
+versioning:
+  scheme: uri-path
+  current: v1
+  base: https://api.workstyleos.com/v1/
+  spec_info_version: 'v1'
+  policy_url: null
+  note: >-
+    The version is carried in the path segment. Acall publishes no written API versioning policy, no
+    supported-version matrix, and no statement of how long a version is maintained.
+maturity:
+  stage: beta
+  evidence: >-
+    Acall's own release announcements describe the Public API as ベータ版 (beta). The provider has not
+    published a GA date or a stability guarantee.
+  source: https://www.acall.jp/info/20200507-2/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No RFC 8594 Sunset or Deprecation header support is documented, and no API deprecation policy page
+    exists. Acall does publish end-of-life notices for product features on the release-notes feed with a
+    dated deadline — e.g. the 2025-11-30 cut-off for the Microsoft Teams webhook change affecting Acall
+    Reception — but these are product notices, not an API contract-deprecation policy, so no Deprecation
+    pointer is emitted.
+  product_eol_example: https://www.workstyleos.com/info/fnfw9i83thvs/
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment is published on the pricing, terms, or security pages.
+status_page:
+  url: https://status.acall.inc/
+  vendor: Atlassian Statuspage
+  status: 200
+  probed: '2026-09-06'
+  incident_reports: https://www.workstyleos.com/sctl/
+release_notes:
+  url: https://www.workstyleos.com/info/release/
+  cadence: monthly roll-up plus per-release entries
+  cross_reference: changelog/acall-changelog.yml
+deprecated_operations: []
+notes:
+- >-
+  Zero of the thirteen operations in openapi/acall-public-api-openapi.yml carry deprecated: true.
+- >-
+  Basic プラン (the entry commercial plan) has been discontinued — stated on the pricing page — which is a
+  commercial lifecycle event rather than an API one.

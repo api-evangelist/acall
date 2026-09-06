@@ -1,0 +1,89 @@
+generated: '2026-09-06'
+method: derived
+source: openapi/acall-public-api-openapi.yml
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    The provider publishes an OpenAPI 3.0.0 document (openapi: "3.0.0") for the Acall Public API, rendered
+    with Redoc at https://www.workstyleos.com/publicapi/index.html.
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: >-
+    securitySchemes.Bearer is type http / scheme bearer, and live 401 responses from
+    https://api.workstyleos.com/v1/ carry an RFC 6750 WWW-Authenticate challenge with realm="token_required"
+    and error="invalid_token".
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme, no authorization or token endpoint, and no scope surface. Tokens are issued
+    out of band by Acall staff.
+- id: oidc
+  conforms: false
+  evidence: >-
+    No /.well-known/openid-configuration is served on any Acall host (see well-known/acall-well-known.yml).
+    The Acall Portal end-user product consumes SSO from customer IdPs but Acall does not act as an OIDC
+    provider for the API.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are text/plain strings; the spec declares no 4xx/5xx responses at all and no
+    application/problem+json media type appears anywhere.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support is documented.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header or equivalent on any of the three mutating operations. See
+    conventions/acall-conventions.yml (idempotency.coverage - none).
+- id: pagination
+  conforms: true
+  evidence: >-
+    Consistent limit/offset query parameters on all six collection operations, though with no total-count or
+    next-link envelope.
+- id: json-api
+  conforms: false
+  evidence: Responses are plain JSON arrays and objects; no JSON:API media type or document structure.
+- id: scim
+  conforms: false
+  evidence: >-
+    Acall exposes worker records at GET /users and GET /users/{user_id} with a proprietary schema. No SCIM
+    2.0 URNs (urn:ietf:params:scim:schemas:*), no /Users or /Groups SCIM endpoints, no PATCH-by-path
+    operations, and no /ServiceProviderConfig. This is the domain standard the market it competes in
+    (workforce identity/provisioning into workplace SaaS) would use, and it is absent.
+- id: odata
+  conforms: false
+  evidence: No $metadata surface and no OData query options.
+- id: iso-27001
+  conforms: true
+  evidence: >-
+    Organizational, not contractual — ISO/IEC 27001 and JIS Q 27001 registration, certificate number
+    ISA IS 0170, published at https://www.workstyleos.com/security/ and
+    https://www.acall.inc/about/details. Recorded here because it is the one certified standard Acall
+    publishes; see security/acall-trust-center.yml.
+domain_standard:
+  found: false
+  market: workplace / visitor management / room and desk booking (facility experience)
+  candidates_probed:
+  - id: scim
+    result: absent
+    note: The natural provisioning standard for a workforce-directory surface; Acall's /users API is bespoke.
+  - id: icalendar-caldav
+    result: absent
+    note: >-
+      Calendar interop is delivered by integrating with Microsoft 365 and Google Calendar as a client, not by
+      Acall exposing an iCalendar/CalDAV surface of its own. No .ics or CalDAV endpoint is published.
+  - id: osdp-and-access-control-standards
+    result: absent
+    note: >-
+      Acall Gate integrates with third-party entry gates but publishes no standardized access-control
+      contract; GET /gates/logs returns a proprietary GateLog schema.
+  - id: brick-schema-haystack
+    result: absent
+    note: >-
+      No smart-building semantic model (Brick, Project Haystack, RealEstateCore) is used for facilities or
+      spots.
+  note: >-
+    Reward-only dimension. Acall's market has candidate standards but the provider adopts none in its
+    contract, so nothing is asserted. This is a recorded absence, not a penalty.
