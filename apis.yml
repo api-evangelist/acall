@@ -29,7 +29,7 @@ tags:
 - Facilities
 - Smart Office
 - Japan
-- SaaS
+- Software-as-a-Service
 tags_raw:
 - workplace-management
 - visitor-management
@@ -42,33 +42,86 @@ tags_raw:
 - japan
 - saas
 apis:
-- name: Acall Public API
-  description: >-
-    REST API (v1) for the Acall / WorkstyleOS workplace platform. Thirteen operations across six resource
-    families — workers (users), facilities, events, gate access logs, spots, and spot reservations — with
-    spot reservations being the only writable surface (create, update, delete). Authentication is an
-    HTTP bearer access token issued by Acall on request; the API is in beta and is not available on the
-    multi-tenant plan.
+- aid: acall:acall-event-api-api
+  name: Acall Event API
+  description: The Event API API from Acall — 2 operation(s) for event api.
   humanURL: https://www.workstyleos.com/publicapi/index.html
   baseURL: https://api.workstyleos.com/v1/
-  image: https://www.workstyleos.com/images/common/ogp/acall_ogp.png
   tags:
-  - Workplace Management
-  - Meeting Room Booking
-  - Desk Booking
-  - Visitor Management
-  - Access Control
-  - Facilities
-  tags_raw:
-  - workplace-management
-  - meeting-room-booking
-  - desk-booking
-  - visitor-management
-  - access-control
-  - facilities
+  - Event API
   properties:
   - type: OpenAPI
-    url: openapi/acall-public-api-openapi.yml
+    url: openapi/acall-event-api-api-openapi.yml
+  - type: APIReference
+    url: https://www.workstyleos.com/publicapi/index.html
+  - type: Documentation
+    url: https://support.workstyleos.com/faq/show/598?site_domain=default
+- aid: acall:acall-facility-api-api
+  name: Acall Facility API
+  description: The Facility API API from Acall — 2 operation(s) for facility api.
+  humanURL: https://www.workstyleos.com/publicapi/index.html
+  baseURL: https://api.workstyleos.com/v1/
+  tags:
+  - Facility API
+  properties:
+  - type: OpenAPI
+    url: openapi/acall-facility-api-api-openapi.yml
+  - type: APIReference
+    url: https://www.workstyleos.com/publicapi/index.html
+  - type: Documentation
+    url: https://support.workstyleos.com/faq/show/598?site_domain=default
+- aid: acall:acall-gate-api-api
+  name: Acall Gate API
+  description: The Gate API API from Acall — 1 operation(s) for gate api.
+  humanURL: https://www.workstyleos.com/publicapi/index.html
+  baseURL: https://api.workstyleos.com/v1/
+  tags:
+  - Gate API
+  properties:
+  - type: OpenAPI
+    url: openapi/acall-gate-api-api-openapi.yml
+  - type: APIReference
+    url: https://www.workstyleos.com/publicapi/index.html
+  - type: Documentation
+    url: https://support.workstyleos.com/faq/show/598?site_domain=default
+- aid: acall:acall-spot-api-api
+  name: Acall Spot API
+  description: The Spot API API from Acall — 1 operation(s) for spot api.
+  humanURL: https://www.workstyleos.com/publicapi/index.html
+  baseURL: https://api.workstyleos.com/v1/
+  tags:
+  - Spot API
+  properties:
+  - type: OpenAPI
+    url: openapi/acall-spot-api-api-openapi.yml
+  - type: APIReference
+    url: https://www.workstyleos.com/publicapi/index.html
+  - type: Documentation
+    url: https://support.workstyleos.com/faq/show/598?site_domain=default
+- aid: acall:acall-spot-reservation-api-api
+  name: Acall Spot Reservation API
+  description: The Spot Reservation API API from Acall — 2 operation(s) for spot reservation api.
+  humanURL: https://www.workstyleos.com/publicapi/index.html
+  baseURL: https://api.workstyleos.com/v1/
+  tags:
+  - Spot Reservation API
+  properties:
+  - type: OpenAPI
+    url: openapi/acall-spot-reservation-api-api-openapi.yml
+  - type: APIReference
+    url: https://www.workstyleos.com/publicapi/index.html
+  - type: Documentation
+    url: https://support.workstyleos.com/faq/show/598?site_domain=default
+- aid: acall:acall-user-api-api
+  name: Acall User API
+  description: The User API API from Acall — 2 operation(s) for user api.
+  humanURL: https://www.workstyleos.com/publicapi/index.html
+  baseURL: https://api.workstyleos.com/v1/
+  tags:
+  - User API
+  properties:
+  - type: OpenAPI
+    url: openapi/acall-user-api-api-openapi.yml
   - type: APIReference
     url: https://www.workstyleos.com/publicapi/index.html
   - type: Documentation
