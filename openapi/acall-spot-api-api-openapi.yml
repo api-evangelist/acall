@@ -1,0 +1,71 @@
+openapi: 3.2.0
+info:
+  title: Acall Public Spot API
+  version: v1
+servers:
+- url: https://api.workstyleos.com/v1/
+security:
+- Bearer: []
+tags:
+- name: Spot API
+  x-displayName: スポット API
+paths:
+  /spots:
+    get:
+      operationId: getSpots
+      parameters:
+      - description: 取得件数を指定します
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: オフセットを指定します
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: spot_idより下の階層のスポット一覧を検索します
+        explode: true
+        in: query
+        name: root_spot_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Spot'
+                type: array
+          description: スポット 一覧を返します
+      summary: スポット 一覧取得
+      tags:
+      - Spot API
+components:
+  schemas:
+    Spot:
+      example:
+        spot_id: 00000000-0000-0000-0000-0000000000000
+        name: 座席A
+        qr_token: '00000000000000000000000000000000'
+      properties:
+        spot_id:
+          type: string
+        name:
+          type: string
+        qr_token:
+          type: string
+  securitySchemes:
+    Bearer:
+      description: Access token for API
+      scheme: bearer
+      type: http

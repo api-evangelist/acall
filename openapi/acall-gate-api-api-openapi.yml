@@ -1,0 +1,153 @@
+openapi: 3.2.0
+info:
+  title: Acall Public Gate API
+  version: v1
+servers:
+- url: https://api.workstyleos.com/v1/
+security:
+- Bearer: []
+tags:
+- name: Gate API
+  x-displayName: ゲート API
+paths:
+  /gates/logs:
+    get:
+      operationId: getGateLogs
+      parameters:
+      - description: 取得件数を指定します
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: オフセットを指定します
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: ゲート名、解錠者名からあいまい検索します
+        explode: true
+        in: query
+        name: freeword
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 検索期間の開始日時を指定します
+        explode: true
+        in: query
+        name: starting_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: 検索期間の終了日時を指定します
+        explode: true
+        in: query
+        name: ending_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GateLog'
+                type: array
+          description: ゲートアクセスログ 一覧を返します
+      summary: ゲートアクセスログ 一覧取得
+      tags:
+      - Gate API
+components:
+  schemas:
+    GateOperator:
+      example:
+        operator_type: guest
+        operator_name: 山田太郎
+      properties:
+        operator_type:
+          enum:
+          - user
+          - guest
+          type: string
+        operator_name:
+          type: string
+    GatePasser:
+      example:
+        id: 00000000-0000-0000-0000-0000000000000
+        family_name: 山田
+        given_name: 太郎
+        family_name_ruby: やまだ
+        given_name_ruby: たろう
+      properties:
+        id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        family_name_ruby:
+          type: string
+        given_name_ruby:
+          type: string
+    GateLog:
+      example:
+        gate_name: エントランスゲート
+        status: ok
+        opened_at: '2020-03-06T16:10:00+09:00'
+        operators:
+        - operator_type: guest
+          operator_name: 山田太郎
+        - operator_type: guest
+          operator_name: 相田晴香
+        passers:
+        - id: 00000000-0000-0000-0000-0000000000000
+          family_name: 山田
+          given_name: 太郎
+          family_name_ruby: やまだ
+          given_name_ruby: たろう
+        - id: 00000000-0000-0000-0000-0000000000001
+          family_name: 相田
+          given_name: 晴香
+          family_name_ruby: そうだ
+          given_name_ruby: はるか
+      properties:
+        gate_id:
+          type: string
+        gate_name:
+          type: string
+        status:
+          enum:
+          - ok
+          - expired
+          - forbidden
+          - timeout
+          - not_found
+          - internal_server_error
+          type: string
+        opened_at:
+          format: date-time
+          type: string
+        operators:
+          items:
+            $ref: '#/components/schemas/GateOperator'
+          type: array
+        passers:
+          items:
+            $ref: '#/components/schemas/GatePasser'
+          type: array
+  securitySchemes:
+    Bearer:
+      description: Access token for API
+      scheme: bearer
+      type: http

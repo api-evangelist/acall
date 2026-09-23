@@ -1,0 +1,30 @@
+{
+  "provider": "acall",
+  "sources": [
+    "_original/acall-public-api-openapi-original.json"
+  ],
+  "outputs": [
+    "acall-event-api-api-openapi.yml",
+    "acall-facility-api-api-openapi.yml",
+    "acall-gate-api-api-openapi.yml",
+    "acall-spot-api-api-openapi.yml",
+    "acall-spot-reservation-api-api-openapi.yml",
+    "acall-user-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "acall-public-api-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "acall-event-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acall-facility-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acall-gate-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acall-spot-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acall-spot-reservation-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "acall-user-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

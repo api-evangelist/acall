@@ -1,0 +1,176 @@
+openapi: 3.2.0
+info:
+  title: Acall Public User API
+  version: v1
+servers:
+- url: https://api.workstyleos.com/v1/
+security:
+- Bearer: []
+tags:
+- name: User API
+  x-displayName: ユーザー API
+paths:
+  /users:
+    get:
+      operationId: getUsers
+      parameters:
+      - description: 取得件数を指定します
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: オフセットを指定します
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: 名前、Emailアドレス、検索キー、部署名からあいまい検索します
+        explode: true
+        in: query
+        name: freeword
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: ユーザー 一覧を返します
+      summary: ユーザー 一覧取得
+      tags:
+      - User API
+  /users/{user_id}:
+    get:
+      operationId: getUser
+      parameters:
+      - explode: false
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+          description: ユーザー 詳細を返します
+      summary: ユーザー 詳細取得
+      tags:
+      - User API
+components:
+  schemas:
+    UserDetail:
+      example:
+        user_id: 00000000-0000-0000-0000-0000000000000
+        family_name: 山田
+        given_name: 太郎
+        family_name_phonetic: やまだ
+        given_name_phonetic: たろう
+        email: yamada@example.com
+        tel: 000-0000-0000
+        role_names:
+        - admin
+        groups:
+        - group_id: 00000000-0000-0000-0000-0000000000000
+          group_name: 営業部
+        - group_id: 00000000-0000-0000-0000-0000000000000
+          group_name: 開発部
+      properties:
+        user_id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        family_name_phonetic:
+          type: string
+        given_name_phonetic:
+          type: string
+        email:
+          type: string
+        tel:
+          type: string
+        role_names:
+          items:
+            type: string
+          type: array
+        belong_groups:
+          items:
+            $ref: '#/components/schemas/UserDetailBelongGroup'
+          type: array
+    UserBelongGroup:
+      example:
+        group_id: 00000000-0000-0000-0000-0000000000000
+        group_name: 営業部
+      properties:
+        group_id:
+          type: string
+        group_name:
+          type: string
+    User:
+      example:
+        user_id: 00000000-0000-0000-0000-0000000000000
+        family_name: 山田
+        given_name: 太郎
+        family_name_phonetic: やまだ
+        given_name_phonetic: たろう
+        email: yamada@example.com
+        tel: 000-0000-0000
+        role_names:
+        - admin
+        groups:
+        - group_id: 00000000-0000-0000-0000-0000000000000
+          group_name: 営業部
+        - group_id: 00000000-0000-0000-0000-0000000000000
+          group_name: 開発部
+      properties:
+        user_id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        family_name_phonetic:
+          type: string
+        given_name_phonetic:
+          type: string
+        email:
+          type: string
+        tel:
+          type: string
+        role_names:
+          items:
+            type: string
+          type: array
+        belong_groups:
+          items:
+            $ref: '#/components/schemas/UserBelongGroup'
+          type: array
+    UserDetailBelongGroup:
+      example:
+        group_id: 00000000-0000-0000-0000-0000000000000
+        group_name: 営業部
+      properties:
+        group_id:
+          type: string
+        group_name:
+          type: string
+  securitySchemes:
+    Bearer:
+      description: Access token for API
+      scheme: bearer
+      type: http

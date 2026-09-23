@@ -1,0 +1,136 @@
+openapi: 3.2.0
+info:
+  title: Acall Public Facility API
+  version: v1
+servers:
+- url: https://api.workstyleos.com/v1/
+security:
+- Bearer: []
+tags:
+- name: Facility API
+  x-displayName: 設備 API
+paths:
+  /facilities:
+    get:
+      operationId: getFacilities
+      parameters:
+      - description: 取得件数を指定します
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: オフセットを指定します
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: 設備名と場所からあいまい検索します
+        explode: true
+        in: query
+        name: freeword
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Facility'
+                type: array
+          description: 設備 一覧を返します
+      summary: 設備 一覧取得
+      tags:
+      - Facility API
+  /facilities/{facility_id}:
+    get:
+      operationId: getFacility
+      parameters:
+      - explode: false
+        in: path
+        name: facility_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityDetail'
+          description: 設備 詳細を返します
+      summary: 設備 詳細取得
+      tags:
+      - Facility API
+components:
+  schemas:
+    Facility:
+      example:
+        facilityID: 00000000-0000-0000-0000-0000000000000
+        facility_name: メイン会議室
+        location: 神戸本社
+        type: room
+        usage:
+        - 社内
+        - 来客
+        description: 神戸本社で一番広い会議室
+      properties:
+        facility_id:
+          type: string
+        facility_name:
+          type: string
+        location:
+          type: string
+        type:
+          enum:
+          - room
+          - equipment
+          type: string
+        usage:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+    FacilityDetail:
+      example:
+        facility_id: 00000000-0000-0000-0000-0000000000000
+        facility_name: メイン会議室
+        location: 神戸本社
+        type: room
+        usage:
+        - 社内
+        - 来客
+        description: 神戸本社で一番広い会議室
+      properties:
+        facility_id:
+          type: string
+        facility_name:
+          type: string
+        location:
+          type: string
+        type:
+          enum:
+          - room
+          - equipment
+          type: string
+        usage:
+          items:
+            type: string
+          type: array
+        description:
+          type: string
+  securitySchemes:
+    Bearer:
+      description: Access token for API
+      scheme: bearer
+      type: http

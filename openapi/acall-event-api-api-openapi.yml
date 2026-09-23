@@ -1,0 +1,366 @@
+openapi: 3.2.0
+info:
+  title: Acall Public Event API
+  version: v1
+servers:
+- url: https://api.workstyleos.com/v1/
+security:
+- Bearer: []
+tags:
+- name: Event API
+  x-displayName: イベント API
+paths:
+  /events:
+    get:
+      operationId: getEvents
+      parameters:
+      - description: 取得件数を指定します
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: オフセットを指定します
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: イベントのタイトル、説明、アジェンダからあいまい検索します
+        explode: true
+        in: query
+        name: freeword
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 検索期間の開始日時を指定します
+        explode: true
+        in: query
+        name: starting_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: 検索期間の終了日時を指定します
+        explode: true
+        in: query
+        name: ending_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Event'
+                type: array
+          description: イベント 一覧を返します
+      summary: イベント 一覧取得
+      tags:
+      - Event API
+  /events/{event_id}:
+    get:
+      operationId: getEvent
+      parameters:
+      - explode: false
+        in: path
+        name: event_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDetail'
+          description: イベント 詳細を返します
+      summary: イベント 詳細取得
+      tags:
+      - Event API
+components:
+  schemas:
+    EventDetailAttendUser:
+      example:
+        user_id: 00000000-0000-0000-0000-0000000000000
+      properties:
+        user_id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        email:
+          type: string
+    EventAttendUser:
+      example:
+        user_id: 00000000-0000-0000-0000-0000000000000
+      properties:
+        user_id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        email:
+          type: string
+    EventDetail:
+      example:
+        event_id: 00000000-0000-0000-0000-0000000000000
+        title: 打ち合わせ
+        guests:
+        - guest_id: 00000000-0000-0000-0000-0000000000000
+          family_name: 相田
+          given_name: 晴香
+          family_name_phonetic: あいだ
+          given_name_phonetic: はるか
+          guest_company_name: 〇〇銀行
+          emails:
+          - aida@example.com
+          - haruka@example.com
+        - guest_id: 00000000-0000-0000-0000-0000000000000
+          family_name: 坂上
+          given_name: 茜
+          family_name_phonetic: さかがみ
+          given_name_phonetic: あかね
+          guest_company_name: 〇〇金融
+          emails:
+          - sakagami@example.com
+          - akane@example.com
+        starting_at: '2020-03-06T16:10:00+09:00'
+        ending_at: '2020-03-06T16:40:00+09:00'
+        attend_users:
+        - user_id: 00000000-0000-0000-0000-0000000000000
+          family_name: 田中
+          given_name: 宗次
+          email: s-tanaka@example.com
+        - user_id: 00000000-0000-0000-0000-0000000000001
+          family_name: 佐藤
+          given_name: 圭一
+          email: k-sato@example.com
+        facilities:
+        - facility_id: 00000000-0000-0000-0000-0000000000000
+          facility_name: メイン会議室
+          facility_type: room
+        - facility_id: 00000000-0000-0000-0000-0000000000001
+          facility_name: サブ会議室
+          facility_type: room
+        note: 打ち合わせのメモ
+        agendas:
+        - agenda1
+        - agenda2
+        mail_template_id: 00000000-0000-0000-0000-0000000000000
+        access_policy: tenant
+      properties:
+        event_id:
+          type: string
+        title:
+          type: string
+        guests:
+          items:
+            $ref: '#/components/schemas/EventDetailGuest'
+          type: array
+        starting_at:
+          format: date-time
+          type: string
+        ending_at:
+          format: date-time
+          type: string
+        attend_users:
+          items:
+            $ref: '#/components/schemas/EventDetailAttendUser'
+          type: array
+        facilities:
+          items:
+            $ref: '#/components/schemas/EventDetailFacility'
+          type: array
+        note:
+          type: string
+        agendas:
+          items:
+            type: string
+          type: array
+        mail_template_id:
+          type: string
+        access_policy:
+          description: 「tenant」の場合、来訪者情報閲覧ポリシーに従ってイベントが公開されます。「attend_user」の場合出席者のみにイベントが公開されます。
+          enum:
+          - tenant
+          - attend_user
+          type: string
+    EventGuest:
+      example:
+        guest_id: 00000000-0000-0000-0000-0000000000000
+        family_name: 相田
+        given_name: 晴香
+        family_name_phonetic: あいだ
+        given_name_phonetic: はるか
+        guest_company_name: 〇〇銀行
+        emails:
+        - aida@example.com
+        - haruka@example.com
+      properties:
+        guest_id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        family_name_phonetic:
+          type: string
+        given_name_phonetic:
+          type: string
+        guest_company_name:
+          type: string
+        emails:
+          items:
+            type: string
+          type: array
+    Event:
+      example:
+        event_id: 00000000-0000-0000-0000-0000000000000
+        title: 打ち合わせ
+        guests:
+        - guest_id: 00000000-0000-0000-0000-0000000000000
+          family_name: 相田
+          given_name: 晴香
+          family_name_phonetic: あいだ
+          given_name_phonetic: はるか
+          guest_company_name: 〇〇銀行
+          emails:
+          - aida@example.com
+          - haruka@example.com
+        - guest_id: 00000000-0000-0000-0000-0000000000000
+          family_name: 坂上
+          given_name: 茜
+          family_name_phonetic: さかがみ
+          given_name_phonetic: あかね
+          guest_company_name: 〇〇金融
+          emails:
+          - sakagami@example.com
+          - akane@example.com
+        starting_at: '2020-03-06T16:10:00+09:00'
+        ending_at: '2020-03-06T16:40:00+09:00'
+        attend_users:
+        - user_id: 00000000-0000-0000-0000-0000000000000
+          family_name: 田中
+          given_name: 宗次
+          email: s-tanaka@example.com
+        - user_id: 00000000-0000-0000-0000-0000000000001
+          family_name: 佐藤
+          given_name: 圭一
+          email: k-sato@example.com
+        facilities:
+        - facility_id: 00000000-0000-0000-0000-0000000000000
+          facility_name: メイン会議室
+          facility_type: room
+        - facility_id: 00000000-0000-0000-0000-0000000000001
+          facility_name: サブ会議室
+          facility_type: room
+        note: 打ち合わせのメモ
+        agendas:
+        - agenda1
+        - agenda2
+        mail_template_id: 00000000-0000-0000-0000-0000000000000
+        access_policy: tenant
+      properties:
+        event_id:
+          type: string
+        title:
+          type: string
+        guests:
+          items:
+            $ref: '#/components/schemas/EventGuest'
+          type: array
+        starting_at:
+          format: date-time
+          type: string
+        ending_at:
+          format: date-time
+          type: string
+        attend_users:
+          items:
+            $ref: '#/components/schemas/EventAttendUser'
+          type: array
+        facilities:
+          items:
+            $ref: '#/components/schemas/EventFacility'
+          type: array
+        note:
+          type: string
+        agendas:
+          items:
+            type: string
+          type: array
+        mail_template_id:
+          type: string
+        access_policy:
+          description: 「tenant」の場合、来訪者情報閲覧ポリシーに従ってイベントが公開されます。「attend_user」の場合出席者のみにイベントが公開されます。
+          enum:
+          - tenant
+          - attend_user
+          type: string
+    EventDetailFacility:
+      example:
+        facility_id: 00000000-0000-0000-0000-0000000000000
+      properties:
+        facility_id:
+          type: string
+        facility_name:
+          type: string
+        facility_type:
+          type: string
+    EventFacility:
+      example:
+        facility_id: 00000000-0000-0000-0000-0000000000000
+      properties:
+        facility_id:
+          type: string
+        facility_name:
+          type: string
+        facility_type:
+          type: string
+    EventDetailGuest:
+      example:
+        guest_id: 00000000-0000-0000-0000-0000000000000
+        family_name: 相田
+        given_name: 晴香
+        family_name_phonetic: あいだ
+        given_name_phonetic: はるか
+        guest_company_name: 〇〇銀行
+        emails:
+        - aida@example.com
+        - haruka@example.com
+      properties:
+        guest_id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        family_name_phonetic:
+          type: string
+        given_name_phonetic:
+          type: string
+        guest_company_name:
+          type: string
+        emails:
+          items:
+            type: string
+          type: array
+  securitySchemes:
+    Bearer:
+      description: Access token for API
+      scheme: bearer
+      type: http
