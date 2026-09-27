@@ -70,36 +70,6 @@ paths:
       - Gate API
 components:
   schemas:
-    GateOperator:
-      example:
-        operator_type: guest
-        operator_name: 山田太郎
-      properties:
-        operator_type:
-          enum:
-          - user
-          - guest
-          type: string
-        operator_name:
-          type: string
-    GatePasser:
-      example:
-        id: 00000000-0000-0000-0000-0000000000000
-        family_name: 山田
-        given_name: 太郎
-        family_name_ruby: やまだ
-        given_name_ruby: たろう
-      properties:
-        id:
-          type: string
-        family_name:
-          type: string
-        given_name:
-          type: string
-        family_name_ruby:
-          type: string
-        given_name_ruby:
-          type: string
     GateLog:
       example:
         gate_name: エントランスゲート
@@ -146,6 +116,36 @@ components:
           items:
             $ref: '#/components/schemas/GatePasser'
           type: array
+    GateOperator:
+      example:
+        operator_type: guest
+        operator_name: 山田太郎
+      properties:
+        operator_type:
+          enum:
+          - user
+          - guest
+          type: string
+        operator_name:
+          type: string
+    GatePasser:
+      example:
+        id: 00000000-0000-0000-0000-0000000000000
+        family_name: 山田
+        given_name: 太郎
+        family_name_ruby: やまだ
+        given_name_ruby: たろう
+      properties:
+        id:
+          type: string
+        family_name:
+          type: string
+        given_name:
+          type: string
+        family_name_ruby:
+          type: string
+        given_name_ruby:
+          type: string
   securitySchemes:
     Bearer:
       description: Access token for API

@@ -73,9 +73,9 @@ paths:
       - Facility API
 components:
   schemas:
-    Facility:
+    FacilityDetail:
       example:
-        facilityID: 00000000-0000-0000-0000-0000000000000
+        facility_id: 00000000-0000-0000-0000-0000000000000
         facility_name: メイン会議室
         location: 神戸本社
         type: room
@@ -101,9 +101,9 @@ components:
           type: array
         description:
           type: string
-    FacilityDetail:
+    Facility:
       example:
-        facility_id: 00000000-0000-0000-0000-0000000000000
+        facilityID: 00000000-0000-0000-0000-0000000000000
         facility_name: メイン会議室
         location: 神戸本社
         type: room

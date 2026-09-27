@@ -73,6 +73,15 @@ paths:
       - User API
 components:
   schemas:
+    UserDetailBelongGroup:
+      example:
+        group_id: 00000000-0000-0000-0000-0000000000000
+        group_name: 営業部
+      properties:
+        group_id:
+          type: string
+        group_name:
+          type: string
     UserDetail:
       example:
         user_id: 00000000-0000-0000-0000-0000000000000
@@ -112,15 +121,6 @@ components:
           items:
             $ref: '#/components/schemas/UserDetailBelongGroup'
           type: array
-    UserBelongGroup:
-      example:
-        group_id: 00000000-0000-0000-0000-0000000000000
-        group_name: 営業部
-      properties:
-        group_id:
-          type: string
-        group_name:
-          type: string
     User:
       example:
         user_id: 00000000-0000-0000-0000-0000000000000
@@ -160,7 +160,7 @@ components:
           items:
             $ref: '#/components/schemas/UserBelongGroup'
           type: array
-    UserDetailBelongGroup:
+    UserBelongGroup:
       example:
         group_id: 00000000-0000-0000-0000-0000000000000
         group_name: 営業部

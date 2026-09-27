@@ -216,12 +216,34 @@ components:
           type: string
         description:
           type: string
-    InvitedUser:
+    inline_object_2:
       example:
-        user_id: 00000000-0000-0000-0000-0000000000000
+        starting_at: '2021-08-06T16:00:00+09:00'
+        ending_at: '2021-08-06T17:00:00+09:00'
+        send_mail: true
+        invited_user_ids:
+        - 00000000-0000-0000-0000-0000000000000
+        - 00000000-0000-0000-0000-0000000000000
+        title: 予約1
+        description: 〇〇について話します
       properties:
-        user_id:
+        starting_at:
+          format: date-time
           type: string
+        ending_at:
+          format: date-time
+          type: string
+        send_mail:
+          type: boolean
+        invited_user_ids:
+          items:
+            type: string
+          type: array
+        title:
+          type: string
+        description:
+          type: string
+      type: object
     inline_object:
       example:
         spot_id: 00000000-0000-0000-0000-0000000000000
@@ -253,34 +275,12 @@ components:
         description:
           type: string
       type: object
-    inline_object_2:
+    InvitedUser:
       example:
-        starting_at: '2021-08-06T16:00:00+09:00'
-        ending_at: '2021-08-06T17:00:00+09:00'
-        send_mail: true
-        invited_user_ids:
-        - 00000000-0000-0000-0000-0000000000000
-        - 00000000-0000-0000-0000-0000000000000
-        title: 予約1
-        description: 〇〇について話します
+        user_id: 00000000-0000-0000-0000-0000000000000
       properties:
-        starting_at:
-          format: date-time
+        user_id:
           type: string
-        ending_at:
-          format: date-time
-          type: string
-        send_mail:
-          type: boolean
-        invited_user_ids:
-          items:
-            type: string
-          type: array
-        title:
-          type: string
-        description:
-          type: string
-      type: object
   requestBodies:
     inline_object_1:
       content:
