@@ -149,20 +149,18 @@ paths:
       - Spot Reservation API
 components:
   schemas:
-    SpotReservation:
+    inline_object:
       example:
-        spot_reservation_id: 00000000-0000-0000-0000-0000000000000
         spot_id: 00000000-0000-0000-0000-0000000000000
-        starting_at: '2021-08-01T16:10:00+09:00'
-        ending_at: '2021-08-01T17:10:00+09:00'
-        invited_users:
-        - user_id: 00000000-0000-0000-0000-0000000000000
-        - user_id: 00000000-0000-0000-0000-0000000000000
+        starting_at: '2021-08-06T16:00:00+09:00'
+        ending_at: '2021-08-06T17:00:00+09:00'
+        send_mail: true
+        invited_user_ids:
+        - 00000000-0000-0000-0000-0000000000000
+        - 00000000-0000-0000-0000-0000000000000
         title: 〇〇の打ち合わせ
         description: 〇〇について話します
       properties:
-        spot_reservation_id:
-          type: string
         spot_id:
           type: string
         starting_at:
@@ -171,20 +169,51 @@ components:
         ending_at:
           format: date-time
           type: string
-        invited_users:
+        send_mail:
+          type: boolean
+        invited_user_ids:
           items:
-            $ref: '#/components/schemas/InvitedUser'
+            type: string
           type: array
         title:
           type: string
         description:
           type: string
+      type: object
     inline_object_1:
       example:
         send_mail: true
       properties:
         send_mail:
           type: boolean
+      type: object
+    inline_object_2:
+      example:
+        starting_at: '2021-08-06T16:00:00+09:00'
+        ending_at: '2021-08-06T17:00:00+09:00'
+        send_mail: true
+        invited_user_ids:
+        - 00000000-0000-0000-0000-0000000000000
+        - 00000000-0000-0000-0000-0000000000000
+        title: 予約1
+        description: 〇〇について話します
+      properties:
+        starting_at:
+          format: date-time
+          type: string
+        ending_at:
+          format: date-time
+          type: string
+        send_mail:
+          type: boolean
+        invited_user_ids:
+          items:
+            type: string
+          type: array
+        title:
+          type: string
+        description:
+          type: string
       type: object
     SpotReservationDetail:
       example:
@@ -216,46 +245,20 @@ components:
           type: string
         description:
           type: string
-    inline_object_2:
+    SpotReservation:
       example:
-        starting_at: '2021-08-06T16:00:00+09:00'
-        ending_at: '2021-08-06T17:00:00+09:00'
-        send_mail: true
-        invited_user_ids:
-        - 00000000-0000-0000-0000-0000000000000
-        - 00000000-0000-0000-0000-0000000000000
-        title: 予約1
-        description: 〇〇について話します
-      properties:
-        starting_at:
-          format: date-time
-          type: string
-        ending_at:
-          format: date-time
-          type: string
-        send_mail:
-          type: boolean
-        invited_user_ids:
-          items:
-            type: string
-          type: array
-        title:
-          type: string
-        description:
-          type: string
-      type: object
-    inline_object:
-      example:
+        spot_reservation_id: 00000000-0000-0000-0000-0000000000000
         spot_id: 00000000-0000-0000-0000-0000000000000
-        starting_at: '2021-08-06T16:00:00+09:00'
-        ending_at: '2021-08-06T17:00:00+09:00'
-        send_mail: true
-        invited_user_ids:
-        - 00000000-0000-0000-0000-0000000000000
-        - 00000000-0000-0000-0000-0000000000000
+        starting_at: '2021-08-01T16:10:00+09:00'
+        ending_at: '2021-08-01T17:10:00+09:00'
+        invited_users:
+        - user_id: 00000000-0000-0000-0000-0000000000000
+        - user_id: 00000000-0000-0000-0000-0000000000000
         title: 〇〇の打ち合わせ
         description: 〇〇について話します
       properties:
+        spot_reservation_id:
+          type: string
         spot_id:
           type: string
         starting_at:
@@ -264,17 +267,14 @@ components:
         ending_at:
           format: date-time
           type: string
-        send_mail:
-          type: boolean
-        invited_user_ids:
+        invited_users:
           items:
-            type: string
+            $ref: '#/components/schemas/InvitedUser'
           type: array
         title:
           type: string
         description:
           type: string
-      type: object
     InvitedUser:
       example:
         user_id: 00000000-0000-0000-0000-0000000000000
@@ -282,12 +282,6 @@ components:
         user_id:
           type: string
   requestBodies:
-    inline_object_1:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_1'
-      required: true
     inline_object_2:
       content:
         application/json:
@@ -299,6 +293,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/inline_object'
+    inline_object_1:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+      required: true
   securitySchemes:
     Bearer:
       description: Access token for API
