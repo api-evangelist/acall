@@ -127,6 +127,9 @@ apis:
   - type: Documentation
     url: https://support.workstyleos.com/faq/show/598?site_domain=default
 common:
+- type: CapabilityMap
+  url: capabilities/acall-capability-edges.yml
+  name: Acall Business Capability Map
 - type: AgenticAccess
   url: agentic-access/acall-agentic-access.yml
 - type: DomainSecurity
