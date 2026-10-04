@@ -73,16 +73,46 @@ paths:
       - User API
 components:
   schemas:
-    UserDetailBelongGroup:
+    UserDetail:
       example:
-        group_id: 00000000-0000-0000-0000-0000000000000
-        group_name: 営業部
+        user_id: 00000000-0000-0000-0000-0000000000000
+        family_name: 山田
+        given_name: 太郎
+        family_name_phonetic: やまだ
+        given_name_phonetic: たろう
+        email: yamada@example.com
+        tel: 000-0000-0000
+        role_names:
+        - admin
+        groups:
+        - group_id: 00000000-0000-0000-0000-0000000000000
+          group_name: 営業部
+        - group_id: 00000000-0000-0000-0000-0000000000000
+          group_name: 開発部
       properties:
-        group_id:
+        user_id:
           type: string
-        group_name:
+        family_name:
           type: string
-    UserBelongGroup:
+        given_name:
+          type: string
+        family_name_phonetic:
+          type: string
+        given_name_phonetic:
+          type: string
+        email:
+          type: string
+        tel:
+          type: string
+        role_names:
+          items:
+            type: string
+          type: array
+        belong_groups:
+          items:
+            $ref: '#/components/schemas/UserDetailBelongGroup'
+          type: array
+    UserDetailBelongGroup:
       example:
         group_id: 00000000-0000-0000-0000-0000000000000
         group_name: 営業部
@@ -130,45 +160,15 @@ components:
           items:
             $ref: '#/components/schemas/UserBelongGroup'
           type: array
-    UserDetail:
+    UserBelongGroup:
       example:
-        user_id: 00000000-0000-0000-0000-0000000000000
-        family_name: 山田
-        given_name: 太郎
-        family_name_phonetic: やまだ
-        given_name_phonetic: たろう
-        email: yamada@example.com
-        tel: 000-0000-0000
-        role_names:
-        - admin
-        groups:
-        - group_id: 00000000-0000-0000-0000-0000000000000
-          group_name: 営業部
-        - group_id: 00000000-0000-0000-0000-0000000000000
-          group_name: 開発部
+        group_id: 00000000-0000-0000-0000-0000000000000
+        group_name: 営業部
       properties:
-        user_id:
+        group_id:
           type: string
-        family_name:
+        group_name:
           type: string
-        given_name:
-          type: string
-        family_name_phonetic:
-          type: string
-        given_name_phonetic:
-          type: string
-        email:
-          type: string
-        tel:
-          type: string
-        role_names:
-          items:
-            type: string
-          type: array
-        belong_groups:
-          items:
-            $ref: '#/components/schemas/UserDetailBelongGroup'
-          type: array
   securitySchemes:
     Bearer:
       description: Access token for API
