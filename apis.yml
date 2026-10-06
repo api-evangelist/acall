@@ -18,7 +18,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.20'
 created: '2026-09-06'
-modified: '2026-09-06'
+modified: '2026-10-06'
 tags:
 - Workplace Management
 - Visitor Management
@@ -127,6 +127,8 @@ apis:
   - type: Documentation
     url: https://support.workstyleos.com/faq/show/598?site_domain=default
 common:
+- url: https://www.acall.inc/news/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/acall-capability-edges.yml
   name: Acall Business Capability Map
