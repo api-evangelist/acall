@@ -88,6 +88,18 @@ components:
           type: string
         given_name_ruby:
           type: string
+    GateOperator:
+      example:
+        operator_type: guest
+        operator_name: 山田太郎
+      properties:
+        operator_type:
+          enum:
+          - user
+          - guest
+          type: string
+        operator_name:
+          type: string
     GateLog:
       example:
         gate_name: エントランスゲート
@@ -134,18 +146,6 @@ components:
           items:
             $ref: '#/components/schemas/GatePasser'
           type: array
-    GateOperator:
-      example:
-        operator_type: guest
-        operator_name: 山田太郎
-      properties:
-        operator_type:
-          enum:
-          - user
-          - guest
-          type: string
-        operator_name:
-          type: string
   securitySchemes:
     Bearer:
       description: Access token for API
