@@ -64,20 +64,137 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Acall Inc. (アコール株式会社) is a Japanese workplace-experience software company, founded in 2010 and
-headquartered in Tokyo with a Kobe office. Its Acall / WorkstyleOS platform runs the physical side of hybrid
-work for more than 7,000 organizations — visitor reception (Acall Reception), meeting-room booking (Acall
-Meeting), free-address desk and workspace "spot" reservation (Acall Desktop), entry-gate integration (Acall
-Gate), AI Meeting, Neat device integration, and a multi-tenant building mode.
+Acall Inc. (アコール株式会社) is a Japanese workplace-experience software company, founded in 2010 and headquartered in Tokyo with a Kobe office, whose Acall / WorkstyleOS platform runs the physical side of hybrid work for more than 7,000 organizations. The product is a set of check-in surfaces — Acall Reception (iPad visitor reception and entry/exit records), Acall Meeting (meeting-room booking and utilization), Acall Desktop (free-address desk and workspace "spot" reservation / hoteling), Acall Gate (entry-gate integration), AI Meeting, Neat device integration and a multi-tenant building mode — stitched to Microsoft 365 and Google Calendar, Teams/Slack/Chatwork notifications, and SSO/SCIM-style provisioning. Acall publishes a REST "Acall Public API" (v1, bearer token) covering workers, facilities, events, gate access logs, spots and spot reservations, plus an outbound Webhook surface for appointment and internal-meeting events. API access is not self-serve: a token is issued only after a request through the contact form, and the API is unavailable on the multi-tenant plan.
 
-Acall publishes a REST **Acall Public API** (v1, HTTP bearer, 13 operations) covering workers, facilities,
-appointments and internal meetings, entry-gate access logs, workspace spots and workspace reservations, plus
-an outbound webhook surface for appointment events. Access is not self-serve: a token is issued only after a
-request through the contact form, and the API is unavailable on the multi-tenant plan.
+**Areas:** Workplace Management · Visitor Management · Meeting Room Booking · Desk Booking · Hybrid Work · Access Control · Facilities · Smart Office · Japan · Software-as-a-Service
 
-- API reference: https://www.workstyleos.com/publicapi/index.html
-- Base URL: https://api.workstyleos.com/v1/
-- Company: https://www.acall.inc/
-- Product: https://www.workstyleos.com/
-- Status: https://status.acall.inc/
-- Secondary-market listing this profile was seeded from: https://equityzen.com/company/acall
+## Acall on APIs.io
+
+Everything profiled for Acall is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/acall/](https://apis.io/providers/acall/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [Acall Event API](https://apis.io/apis/acall/acall-event-api-api/) — The Event API API from Acall — 2 operation(s) for event api.
+- [Acall Facility API](https://apis.io/apis/acall/acall-facility-api-api/) — The Facility API API from Acall — 2 operation(s) for facility api.
+- [Acall Gate API](https://apis.io/apis/acall/acall-gate-api-api/) — The Gate API API from Acall — 1 operation(s) for gate api.
+- [Acall Spot API](https://apis.io/apis/acall/acall-spot-api-api/) — The Spot API API from Acall — 1 operation(s) for spot api.
+- [Acall Spot Reservation API](https://apis.io/apis/acall/acall-spot-reservation-api-api/) — The Spot Reservation API API from Acall — 2 operation(s) for spot reservation api.
+- [Acall User API](https://apis.io/apis/acall/acall-user-api-api/) — The User API API from Acall — 2 operation(s) for user api.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Acall Webhooks](https://apis.io/asyncapis/acall/acall-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [acall](https://apis.io/servers/acall/acall/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Acall Agentic Access](https://apis.io/agentic-access/acall/acall-agentic-access/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Acall Public Api Overlay](https://apis.io/overlays/acall/acall-public-api-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Acall Authentication](https://apis.io/security/acall/acall-authentication/)
+- [Acall Domain Security](https://apis.io/security/acall/acall-domain-security/)
+- [Acall Trust Center](https://apis.io/security/acall/acall-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Acall Plans Pricing](https://apis.io/plans/acall/acall-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Acall Rate Limits](https://apis.io/rate-limits/acall/acall-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.acall.inc/)
+- [Documentation](https://support.workstyleos.com/faq/show/598?site_domain=default)
+- [API reference](https://www.workstyleos.com/publicapi/index.html)
+- [Pricing](https://www.workstyleos.com/pricing/)
+- [Support](https://support.workstyleos.com/?site_domain=default)
+- [Changelog](https://www.workstyleos.com/info/release/)
+- [Blog](https://www.acall.inc/news/)
+- [Compliance](https://www.workstyleos.com/security/)
+- [Terms of service](https://www.workstyleos.com/terms_of_use/)
+- [Privacy policy](https://www.acall.inc/privacypolicy)
+- [GitHub](https://github.com/acall-inc)
+- [Status](https://status.acall.inc/)
+
+## API Evangelist rating
+
+**Kin Score 44.1** — developing · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 53.1 |
+| Contract governance | 4.5 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 37.5 |
+| Access clarity | 46.1 |
+
+**Agent readiness 27.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/acall/](https://apis.io/providers/acall/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Acall: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/acall/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
